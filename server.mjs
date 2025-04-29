@@ -24,20 +24,20 @@ app.post('/generate-poem', async (req, res) => {
     wordCount = 50,
   } = req.body;
 
-  const prompt = \`
-    Write a unique, beautiful, and memorable poem of approximately \${wordCount} words.
-    The poem should be in \${style} style, with a \${mood} and \${tone} tone.
-    It's for someone named \${name}, on the occasion of \${occasion}.
-    They are known for being \${traits}.
-    Please also include or be inspired by these words if possible: \${favorites}.
-  \`;
+  const prompt = `
+    Write a unique, beautiful, and memorable poem of approximately ${wordCount} words.
+    The poem should be in ${style} style, with a ${mood} and ${tone} tone.
+    It's for someone named ${name}, on the occasion of ${occasion}.
+    They are known for being ${traits}.
+    Please also include or be inspired by these words if possible: ${favorites}.
+  `;
 
   try {
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': \`Bearer \${OPENROUTER_API_KEY}\`
+        'Authorization': `Bearer ${OPENROUTER_API_KEY}`
       },
       body: JSON.stringify({
         model: 'meta-llama/llama-4-maverick',
@@ -69,18 +69,18 @@ app.post('/regenerate', async (req, res) => {
     return res.status(400).json({ error: 'No selection provided.' });
   }
 
-  const prompt = \`
+  const prompt = `
     Take the following excerpt of a poem and regenerate it in a similar tone, but make it fresh and unique:
-    "\${selection}"
+    "${selection}"
     Respond with only the revised lines.
-  \`;
+  `;
 
   try {
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': \`Bearer \${OPENROUTER_API_KEY}\`
+        'Authorization': `Bearer ${OPENROUTER_API_KEY}`
       },
       body: JSON.stringify({
         model: 'meta-llama/llama-4-maverick',
